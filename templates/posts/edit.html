@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 
-{% block title %}Edit <Profile>{% endblock title %}</Profile>
+{% block title %}Edit Profile{% endblock title %}
 
 {% block content %}
 <h1> Edit Post</h1>
-<form mehtod="POST">
+<form method="POST">
     {% csrf_token %}
-    {{ form.as_p}}
+    {{ form.as_p }}
     <input type="submit" class="btn btn-success" value="Edit">
 </form>
 {% endblock content %}
