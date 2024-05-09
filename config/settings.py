@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-x=6b2jy@e7^mehff9=!r_&u0kl5vm)!rda2tk4#g*!ds176)j(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -127,6 +127,7 @@ STATICFILES_DIRS =[str(BASE_DIR.joinpath('static'))]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 #If you don't want to redirect to the template
 #LOGOUT_REDIRECT_URL = 'home'
