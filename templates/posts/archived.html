@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Archived Post{% endblock title %}
+
+{% block content %}
+<h1>Archived Post</h1>
+<ul>
+    {% for post in post_list %}
+    <li>{{ post.title }} - {{ post.created_on }}</li>
+    {% empty on %}
+    <li>No archived post available</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

@@ -12,7 +12,20 @@ from .models import Post, Status
 class PostListView(ListView):
     template_name = 'posts/list.html'
     model = Post
+    #context_object_name = 'posts_list'
     # Can you make so that this view only shows published posts (to everyone)?
+    #def get_queryset(self):
+        #return Post.objects.filter(status__name='published')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        published_status = Status.objects.get(name='published')
+        context['post_list'] =(
+            Post.objects.filter(status=published_status)
+            .order_by('created on').reverse()
+        )
+        return context
+
 class DraftPostListView(LoginRequiredMixin, ListView):
     template_name = 'posts/list.html'
     model = Post
@@ -28,6 +41,19 @@ class DraftPostListView(LoginRequiredMixin, ListView):
 class PostDetailView(DetailView):
     template_name = 'posts/detail.html'
     model = Post
+
+#fix this!!
+class ArchivePostListView(LoginRequiredMixin, ListView):
+    template_name = "post/list.html"
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        draft_status = Status.objects.get(name='archived')
+        context['post_list'] = Post.objects.filter(
+            status=draft_status).filter(
+                author=self.request.user).order_by('created_on').reverse()
+        return context
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'posts/new.html'

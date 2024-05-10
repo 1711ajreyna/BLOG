@@ -4,9 +4,13 @@
 
 {% block content %}
 <h1>Posts</h1>
+{% if posts_list %}
 <ul>
-    {% for posts in posts_list %}
-    <li><a href="{% url 'detail' posts.id %}">{{ post.title }}</a></li>
+    {% for post in post_list %}
+    <li><a href="{% url 'detail' post.id %}">{{ post.title }}</a></li>
     {% endfor %}
 </ul>
+{% else %}
+<p>No posts available.</p>
+{% endif %}
 {% endblock content %}
