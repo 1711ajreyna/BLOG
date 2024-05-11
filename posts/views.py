@@ -44,15 +44,15 @@ class PostDetailView(DetailView):
 
 #fix this!!
 class ArchivePostListView(LoginRequiredMixin, ListView):
-    template_name = "post/list.html"
+    template_name = "posts/archived.html"
     model = Post
+    context_object_name = 'post_list'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        draft_status = Status.objects.get(name='archived')
+        archived_status = Status.objects.get(name='archived')
         context['post_list'] = Post.objects.filter(
-            status=draft_status).filter(
-                author=self.request.user).order_by('created_on').reverse()
+            status=archived_status).order_by('created_on').reverse()
         return context
 
 class PostCreateView(LoginRequiredMixin, CreateView):
